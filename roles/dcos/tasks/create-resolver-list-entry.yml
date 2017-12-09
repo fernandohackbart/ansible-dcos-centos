@@ -1,10 +1,10 @@
 ---
 - name: Adding {{ item }} to the master list
   set_fact:
-    dcos_master_ip: "{{ item }}"
+    dcos_resolver_ip: "{{ item }}"
     
-- name: Create fragment for host {{ dcos_master_ip }} at {{ dcos_fragments_dir }}/config-3-master-list-entry-{{ dcos_master_ip }}.yml
+- name: Create fragment for host {{ dcos_resolver_ip }} at {{ dcos_fragments_dir }}/config-5-resolver-list-entry-{{ dcos_resolver_ip }}.yml
   template:
-    src: config-3-master-list-entry.yml
-    dest: "{{ dcos_fragments_dir }}/config-3-master-list-entry-{{ dcos_master_ip }}.yml"
+    src: config-5-resolver-list-entry.yml
+    dest: "{{ dcos_fragments_dir }}/config-5-resolver-list-entry-{{ dcos_resolver_ip }}.yml"
     mode: 0644

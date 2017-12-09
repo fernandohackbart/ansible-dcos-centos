@@ -29,25 +29,26 @@
   with_items:
      - "{{ dcos_masters }}"
 
-- name: Create {{ dcos_fragments_dir }}/config-4-resolvers.yaml
+- name: Create {{ dcos_fragments_dir }}/config-4-resolver.yaml
   template:
-    src: config-4-resolvers.yaml
-    dest: "{{ dcos_fragments_dir }}/config-4-resolvers.yaml"
+    src: config-4-resolver.yaml
+    dest: "{{ dcos_fragments_dir }}/config-4-resolver.yaml"
     mode: 0644 
 
-- name: Create resolvers list fragments
-  include_tasks: create-resolvers-list-entry.yml
+- name: Create resolver list fragments
+  include_tasks: create-resolver-list-entry.yml
   with_items:
      - "{{ dcos_resolvers }}"
 
-- name: Create {{ dcos_fragments_dir }}/config-6-proxy.yaml
-  template:
-    src: config-6-proxy.yaml
-    dest: "{{ dcos_fragments_dir }}/config-6-proxy.yaml"
-    mode: 0644 
-
 - name: Create {{ dcos_fragments_dir }}/config-7-noproxy.yaml
   block:
+
+  - name: Create {{ dcos_fragments_dir }}/config-6-proxy.yaml
+    template:
+      src: config-6-proxy.yaml
+      dest: "{{ dcos_fragments_dir }}/config-6-proxy.yaml"
+      mode: 0644 
+    
   - name: Create {{ dcos_fragments_dir }}/config-7-noproxy.yaml
     template:
       src: config-7-noproxy.yaml
@@ -59,7 +60,7 @@
     with_items:
        - "{{ dcos_no_proxy }}"
   when:
-    {{ dcos_require_proxy }} == true
+    dcos_require_proxy == true
 
 - name: Adding fragments from {{ dcos_fragments_dir }} to {{ dcos_config_file }}  
   assemble:
@@ -67,6 +68,10 @@
     dest: "{{ dcos_config_file }}"
     mode: 0644
 
+- name: Removes {{dcos_stage_dir}}/fragments directory
+  file: 
+    path: "{{dcos_stage_dir}}/fragments"
+    state: absent   
 ####################################################################
 - name: Create {{ dcos_ip_script }}
   copy:
