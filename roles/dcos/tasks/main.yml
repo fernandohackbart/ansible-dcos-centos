@@ -1,0 +1,84 @@
+---
+- name: Creates {{dcos_stage_dir}}/geconf directory
+  file: 
+    path: "{{dcos_stage_dir}}/geconf"
+    state: directory
+    recurse: yes
+
+####################################################################
+- name: Creates {{dcos_stage_dir}}/fragments directory
+  file: 
+    path: "{{dcos_stage_dir}}/fragments"
+    state: directory
+    recurse: yes
+    
+- name: Create {{ dcos_fragments_dir }}/config-1-header.yaml
+  template:
+    src: config-1-header.yaml
+    dest: "{{ dcos_fragments_dir }}/config-1-header.yaml"
+    mode: 0644 
+
+- name: Create {{ dcos_fragments_dir }}/config-2-master.yaml
+  template:
+    src: config-2-master.yaml
+    dest: "{{ dcos_fragments_dir }}/config-2-master.yaml"
+    mode: 0644 
+
+- name: Create master list fragments
+  include_tasks: create-master-list-entry.yml
+  with_items:
+     - "{{ dcos_masters }}"
+
+- name: Create {{ dcos_fragments_dir }}/config-4-resolvers.yaml
+  template:
+    src: config-4-resolvers.yaml
+    dest: "{{ dcos_fragments_dir }}/config-4-resolvers.yaml"
+    mode: 0644 
+
+- name: Create resolvers list fragments
+  include_tasks: create-resolvers-list-entry.yml
+  with_items:
+     - "{{ dcos_resolvers }}"
+
+- name: Create {{ dcos_fragments_dir }}/config-6-proxy.yaml
+  template:
+    src: config-6-proxy.yaml
+    dest: "{{ dcos_fragments_dir }}/config-6-proxy.yaml"
+    mode: 0644 
+
+- name: Create {{ dcos_fragments_dir }}/config-7-noproxy.yaml
+  block:
+  - name: Create {{ dcos_fragments_dir }}/config-7-noproxy.yaml
+    template:
+      src: config-7-noproxy.yaml
+      dest: "{{ dcos_fragments_dir }}/config-7-noproxy.yaml"
+      mode: 0644 
+    
+  - name: Create no-proxy list fragments
+    include_tasks: create-no-proxy-list-entry.yml
+    with_items:
+       - "{{ dcos_no_proxy }}"
+  when:
+    {{ dcos_require_proxy }} == true
+
+- name: Adding fragments from {{ dcos_fragments_dir }} to {{ dcos_config_file }}  
+  assemble:
+    src: "{{ dcos_fragments_dir }}"
+    dest: "{{ dcos_config_file }}"
+    mode: 0644
+
+####################################################################
+- name: Create {{ dcos_ip_script }}
+  copy:
+    src: ip-detect
+    dest: "{{ dcos_ip_script }}"
+    mode: 0755 
+
+#- name: Download https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+#  get_url:
+#    url: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+#    dest: "{{ dcos_config_script }}"
+#    mode: 0755
+
+#dcos_generate_config.sh
+    

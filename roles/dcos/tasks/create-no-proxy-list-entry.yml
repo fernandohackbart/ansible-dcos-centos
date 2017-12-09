@@ -1,0 +1,10 @@
+---
+- name: Adding {{ item }} to the master list
+  set_fact:
+    dcos_no_proxy_entry: "{{ item }}"
+    
+- name: Create fragment {{ dcos_no_proxy_entry }} at {{ dcos_fragments_dir }}/config-9-no-proxy-list-entry-{{ dcos_no_proxy_entry }}.yml
+  template:
+    src: config-9-no-proxy-list-entry.yml
+    dest: "{{ dcos_fragments_dir }}/config-9-no-proxy-list-entry-{{ dcos_no_proxy_entry }}.yml"
+    mode: 0644

@@ -1,0 +1,7 @@
+---
+- name: "Install DC/OS cluster"
+  hosts: dcosservers
+  remote_user: root
+  roles:
+     - dcos
+

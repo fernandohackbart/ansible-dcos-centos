@@ -1,0 +1,3 @@
+use_proxy: {{ dcos_require_proxy }}
+http_proxy: http://{{ dcos_http_proxy_ip }}:{{ dcos_http_proxy_port }}
+https_proxy: https://{{ dcos_http_proxy_ip }}:{{ dcos_https_proxy_port }}
