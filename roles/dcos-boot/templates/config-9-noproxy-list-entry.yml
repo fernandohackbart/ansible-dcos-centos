@@ -1,1 +1,1 @@
-- {{ dcos_resolver_ip }} 
+- {{ dcos_no_proxy_entry }} 

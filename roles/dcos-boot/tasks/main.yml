@@ -56,7 +56,7 @@
       mode: 0644 
     
   - name: Create no-proxy list fragments
-    include_tasks: create-no-proxy-list-entry.yml
+    include_tasks: create-noproxy-list-entry.yml
     with_items:
        - "{{ dcos_no_proxy }}"
   when:
