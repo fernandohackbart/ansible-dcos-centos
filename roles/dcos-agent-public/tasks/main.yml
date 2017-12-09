@@ -1,0 +1,19 @@
+---
+- name: Creates /tmp/dcos directory
+  file: 
+    path: /tmp/dcos
+    state: directory
+
+- name: Download http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}/dcos_install.sh
+  get_url:
+    url: http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}/dcos_install.sh
+    dest: /tmp/dcos/dcos_install.sh
+    mode: 0755
+
+- name: Creates the installation file 
+  shell: "/tmp/dcos/dcos_install.sh slave_public"
+  args:
+    chdir: "/tmp/dcos"
+    
+    
+

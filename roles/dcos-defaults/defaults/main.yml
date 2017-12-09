@@ -1,11 +1,11 @@
 ---
 dcos_stage_dir: "/opt/stage"
-dcos_config_file: "{{ dcos_stage_dir }}/geconf/config.yaml"
+dcos_config_file: "{{ dcos_stage_dir }}/genconf/config.yaml"
 dcos_fragments_dir: "{{ dcos_stage_dir }}/fragments"
 dcos_bootstrap_ip: "192.168.30.100"
 dcos_bootstrap_port: "80"
 dcos_cluster_name: "prototype"
-dcos_ip_script: "{{ dcos_stage_dir }}/geconf/ip-detect"
+dcos_ip_script: "{{ dcos_stage_dir }}/genconf/ip-detect"
 dcos_config_script: "{{ dcos_stage_dir }}/dcos_generate_config.sh"
 dcos_resolvers: ["8.8.4.4","8.8.8.8"]
 dcos_masters: ["192.168.30.101","192.168.30.102","192.168.30.103"]

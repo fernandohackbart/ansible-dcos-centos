@@ -2,6 +2,15 @@ all:
   hosts:
     dcos-boot
   children:
-    dcosservers:
+    dcosboot:
       hosts:
-        192.168.30.2:
+        192.168.30.100:
+    dcosmaster:
+      hosts:
+        192.168.30.101:
+    dcosprivateagent:
+      hosts:
+        192.168.30.102:
+    dcospublicagent:
+      hosts:
+        192.168.30.103:

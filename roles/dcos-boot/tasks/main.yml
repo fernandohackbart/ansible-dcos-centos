@@ -1,7 +1,7 @@
 ---
-- name: Creates {{dcos_stage_dir}}/geconf directory
+- name: Creates {{dcos_stage_dir}}/genconf directory
   file: 
-    path: "{{dcos_stage_dir}}/geconf"
+    path: "{{dcos_stage_dir}}/genconf"
     state: directory
     recurse: yes
 
@@ -79,11 +79,16 @@
     dest: "{{ dcos_ip_script }}"
     mode: 0755 
 
-#- name: Download https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
-#  get_url:
-#    url: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
-#    dest: "{{ dcos_config_script }}"
-#    mode: 0755
+- name: Download https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+  get_url:
+    url: https://downloads.dcos.io/dcos/stable/dcos_generate_config.sh
+    dest: "{{ dcos_config_script }}"
+    mode: 0755
 
-#dcos_generate_config.sh
+- name: Creates the installation file 
+  shell: "{{ dcos_config_script }}"
+  args:
+    chdir: "{{dcos_stage_dir}}"
     
+- name: Run server on http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}
+  shell: "docker run -d -p {{ dcos_bootstrap_port }}:80 -v {{dcos_stage_dir}}/genconf/serve:/usr/share/nginx/html:ro nginx"

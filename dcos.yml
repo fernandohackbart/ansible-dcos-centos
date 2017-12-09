@@ -1,7 +1,24 @@
 ---
-- name: "Install DC/OS cluster"
-  hosts: dcosservers
+- name: "Install DC/OS cluster boot"
+  hosts: dcosboot
   remote_user: root
   roles:
-     - dcos
-
+     - dcos-boot
+     
+- name: "Install DC/OS cluster masters"
+  hosts: dcosmaster
+  remote_user: root
+  roles:
+     - dcos-master
+     
+- name: "Install DC/OS cluster private agents"
+  hosts: dcosprivateagent
+  remote_user: root
+  roles:
+     - dcos-agent-private
+     
+- name: "Install DC/OS cluster public agents"
+  hosts: dcospublicagent
+  remote_user: root
+  roles:
+     - dcos-agent-public
