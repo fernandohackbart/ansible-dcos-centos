@@ -8,9 +8,9 @@ all:
     dcosmaster:
       hosts:
         192.168.30.101:
-    dcosprivateagent:
-      hosts:
-        192.168.30.102:
-    dcospublicagent:
-      hosts:
-        192.168.30.103:
+#    dcosprivateagent:
+#      hosts:
+#        192.168.30.102:
+#    dcospublicagent:
+#      hosts:
+#        192.168.30.103:

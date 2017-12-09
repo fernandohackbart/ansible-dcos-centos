@@ -10,7 +10,7 @@
     dest: /tmp/dcos/dcos_install.sh
     mode: 0755
 
-- name: Creates the installation file 
+- name: Run master installation 
   shell: "/tmp/dcos/dcos_install.sh master"
   args:
     chdir: "/tmp/dcos"

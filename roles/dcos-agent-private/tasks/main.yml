@@ -10,7 +10,7 @@
     dest: /tmp/dcos/dcos_install.sh
     mode: 0755
 
-- name: Creates the installation file 
+- name: Runs private agent installation 
   shell: "/tmp/dcos/dcos_install.sh slave"
   args:
     chdir: "/tmp/dcos"

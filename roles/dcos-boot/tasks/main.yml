@@ -92,3 +92,4 @@
     
 - name: Run server on http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}
   shell: "docker run -d -p {{ dcos_bootstrap_port }}:80 -v {{dcos_stage_dir}}/genconf/serve:/usr/share/nginx/html:ro nginx"
+  ignore_errors: yes
