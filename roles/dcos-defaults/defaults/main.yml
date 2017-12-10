@@ -7,8 +7,8 @@ dcos_bootstrap_port: "80"
 dcos_cluster_name: "prototype"
 dcos_ip_script: "{{ dcos_stage_dir }}/genconf/ip-detect"
 dcos_config_script: "{{ dcos_stage_dir }}/dcos_generate_config.sh"
-dcos_resolvers: ["8.8.4.4","8.8.8.8"]
-dcos_masters: ["192.168.30.101","192.168.30.102","192.168.30.103"]
+dcos_resolvers: ["192.168.122.1","192.168.30.2"]
+dcos_masters: ["192.168.30.101"]
 
 dcos_require_proxy: false
 dcos_http_proxy_ip: "192.168.30.1"
