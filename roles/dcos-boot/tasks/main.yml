@@ -90,6 +90,14 @@
   args:
     chdir: "{{dcos_stage_dir}}"
     
-- name: Run server on http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}
-  shell: "docker run -d -p {{ dcos_bootstrap_port }}:80 -v {{dcos_stage_dir}}/genconf/serve:/usr/share/nginx/html:ro nginx"
+- name: Kill dcos-boot container
+  shell: "docker kill dcos-boot"
+  ignore_errors: yes
+  
+- name: Remove dcos-boot container
+  shell: "docker rm dcos-boot"
+  ignore_errors: yes
+  
+- name: Run dcos-boot container at http://{{ dcos_bootstrap_ip }}:{{ dcos_bootstrap_port }}
+  shell: "docker run --name dcos-boot -d -p {{ dcos_bootstrap_port }}:80 -v {{dcos_stage_dir}}/genconf/serve:/usr/share/nginx/html:ro nginx"
   ignore_errors: yes

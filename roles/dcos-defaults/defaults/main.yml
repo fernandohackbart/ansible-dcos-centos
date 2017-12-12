@@ -1,4 +1,5 @@
 ---
+dcos_cluster_if: "eth0"
 dcos_stage_dir: "/opt/stage"
 dcos_config_file: "{{ dcos_stage_dir }}/genconf/config.yaml"
 dcos_fragments_dir: "{{ dcos_stage_dir }}/fragments"
