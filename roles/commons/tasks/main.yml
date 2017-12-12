@@ -1,7 +1,0 @@
----
-
-#- name: Setting cluster network {{ dcos_cluster_if }} ipv4.route-metric 200
-#  shell: "nmcli con mod 'System {{ dcos_cluster_if }}' ipv4.route-metric 200"
-  
-#- name: Restart network
-#  shell: systemctl restart network

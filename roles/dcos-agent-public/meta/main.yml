@@ -1,5 +1,4 @@
 ---
 dependencies:
-  - commons
   - dcos-defaults
  

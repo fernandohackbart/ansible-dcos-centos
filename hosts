@@ -1,49 +1,34 @@
 all:
   hosts:
     dcos-boot
+  vars:
+    dcos_bootstrap_ip: "192.168.40.20"
+    dcos_bootstrap_port: "80"  
   children:
-    dcosboot:
-      hosts:
-        192.168.40.20:
-      vars:
-        dcos_cluster_if: "eth0"      
-        dcos_stage_dir: "/opt/stage"
-        dcos_config_file: "{{ dcos_stage_dir }}/genconf/config.yaml"
-        dcos_fragments_dir: "{{ dcos_stage_dir }}/fragments"
-        dcos_bootstrap_ip: "192.168.40.20"
-        dcos_bootstrap_port: "80"
-        dcos_cluster_name: "prototype"
-        dcos_ip_script: "{{ dcos_stage_dir }}/genconf/ip-detect"
-        dcos_config_script: "{{ dcos_stage_dir }}/dcos_generate_config.sh"
-        dcos_resolvers: ["192.168.40.1"]
-        dcos_masters: ["192.168.40.30"]
-        dcos_require_proxy: false
-        dcos_http_proxy_ip: "192.168.40.1"
-        dcos_http_proxy_port: "80"
-        dcos_https_proxy_ip: "192.168.40.1"
-        dcos_https_proxy_port: "443"
-        dcos_no_proxy: ["foo.bar.com",".baz.com"]      
-
+#    dcosboot:
+#      hosts:
+#        192.168.40.20:
+#      vars:   
+#        dcos_stage_dir: "/opt/stage"
+#        dcos_config_file: "{{ dcos_stage_dir }}/genconf/config.yaml"
+#        dcos_fragments_dir: "{{ dcos_stage_dir }}/fragments"
+#        dcos_cluster_name: "prototype"
+#        dcos_ip_script: "{{ dcos_stage_dir }}/genconf/ip-detect"
+#        dcos_config_script: "{{ dcos_stage_dir }}/dcos_generate_config.sh"
+#        dcos_resolvers: ["192.168.40.1"]
+#        dcos_masters: ["192.168.40.30"]
+#        dcos_require_proxy: false
+#        dcos_http_proxy_ip: "192.168.40.1"
+#        dcos_http_proxy_port: "80"
+#        dcos_https_proxy_ip: "192.168.40.1"
+#        dcos_https_proxy_port: "443"
+#        dcos_no_proxy: ["foo.bar.com",".baz.com"]      
 #    dcosmaster:
 #      hosts:
 #        192.168.40.30:
-#      vars:
-#        dcos_bootstrap_ip: "192.168.40.30"
-#        dcos_bootstrap_port: "80"
-#        dcos_cluster_if: "eth0"
-
-#    dcosprivateagent:
-#      hosts:
-#        192.168.40.40:
-#      vars:
-#        dcos_bootstrap_ip: "192.168.40.30"
-#        dcos_bootstrap_port: "80"
-#        dcos_cluster_if: "eth0"
-
+    dcosprivateagent:
+      hosts:
+        192.168.40.40:
 #    dcospublicagent:
 #      hosts:
 #        192.168.40.41:
-#      vars:
-#        dcos_bootstrap_ip: "192.168.40.30"
-#        dcos_bootstrap_port: "80"
-#        dcos_cluster_if: "eth0"
