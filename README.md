@@ -39,7 +39,7 @@ virt-install \
  --description="DCOS Master 1 machine" \
  --os-type=Linux \
  --os-variant=generic \
- --ram=7000 \
+ --ram=4500 \
  --vcpus=1 \
  --graphics=vnc \
  --noautoconsole \
@@ -62,14 +62,35 @@ virt-install \
  --os-type=Linux \
  --os-variant=generic \
  --ram=7000 \
- --vcpus=1 \
+ --vcpus=2 \
  --graphics=vnc \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-agent1/dcos-agent1.img,bus=virtio,size=7 \
  --pxe \
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:5e
- ```
+```
 
+```
+virsh destroy dcos-agent2;virsh undefine dcos-agent2;rm -rf /opt/dcos/guests/dcos-agent2/
+```
+
+```
+mkdir -p /opt/dcos/guests/dcos-agent2/
+
+virt-install \
+ -n dcos-agent2 \
+ --description="DCOS Agent 2 machine" \
+ --os-type=Linux \
+ --os-variant=generic \
+ --ram=7000 \
+ --vcpus=2 \
+ --graphics=vnc \
+ --noautoconsole \
+ --disk path=/opt/dcos/guests/dcos-agent2/dcos-agent2.img,bus=virtio,size=7 \
+ --pxe \
+ --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:65
+```
+ 
 ### Create a NFS guest
 ```
 virsh destroy dcos-nfs1;virsh undefine dcos-nfs1;rm -rf /opt/dcos/guests/dcos-nfs1/
@@ -94,10 +115,14 @@ virt-install \
 
 If this is a reinstallation the guests should be removed from the known_hosts
 ```
+ssh-keygen -R 192.168.40.20 -f /home/fernando.hackbart/.ssh/known_hosts
 ssh-keygen -R 192.168.40.30 -f /home/fernando.hackbart/.ssh/known_hosts
 ssh-keygen -R 192.168.40.40 -f /home/fernando.hackbart/.ssh/known_hosts
+ssh-keygen -R 192.168.40.47 -f /home/fernando.hackbart/.ssh/known_hosts
+ssh root@192.168.40.20 date
 ssh root@192.168.40.30 date
 ssh root@192.168.40.40 date
+ssh root@192.168.40.47 date
 ```
 
 After the guests are created the Ansible playbook can be run against the guests
