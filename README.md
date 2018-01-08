@@ -23,6 +23,7 @@ virt-install \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-boot/dcos-boot.img,bus=virtio,size=10 \
  --pxe \
+ --boot=hd,network \ 
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:5c
 ```
  
@@ -45,6 +46,7 @@ virt-install \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-master1/dcos-master1.img,bus=virtio,size=7 \
  --pxe \
+ --boot=hd,network \ 
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:5d
 ```
  
@@ -67,6 +69,7 @@ virt-install \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-agent1/dcos-agent1.img,bus=virtio,size=7 \
  --pxe \
+ --boot=hd,network \ 
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:5e
 ```
 
@@ -88,6 +91,7 @@ virt-install \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-agent2/dcos-agent2.img,bus=virtio,size=7 \
  --pxe \
+ --boot=hd,network \ 
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:65
 ```
  
@@ -110,6 +114,7 @@ virt-install \
  --noautoconsole \
  --disk path=/opt/dcos/guests/dcos-nfs1/dcos-nfs1.img,bus=virtio,size=7 \
  --pxe \
+ --boot=hd,network \ 
  --network=bridge:dcos-br0,model=virtio,mac=52:54:00:e2:87:5f
 ```
 
